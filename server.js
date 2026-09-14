@@ -24,6 +24,8 @@ MIDDLEWARE
 const allowedOrigins = [
   "http://localhost:5173",
   "https://sqlforge-frontend-i25x.vercel.app",
+  "https://sqlforge-frontend-i25x-6wsrnh3fp-joerenalds-projects.vercel.app",
+  "https://sqlforge-frontend-i25x-hebh8w8ty-joerenalds-projects.vercel.app",
 ];
 
 app.use(
