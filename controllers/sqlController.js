@@ -50,8 +50,19 @@ const executeQuery = async (req, res) => {
 // ============================================================
 
 const getTables = async (req, res) => {
+  console.log("GET /api/sql/tables called");
+
   try {
+    console.log("Attempting MySQL connection...");
+    console.log("DB_HOST:", process.env.DB_HOST);
+    console.log("DB_PORT:", process.env.DB_PORT);
+    console.log("DB_USER:", process.env.DB_USER);
+    console.log("DB_NAME:", process.env.DB_NAME);
+
     const [rows] = await pool.query("SHOW TABLES");
+
+    console.log("MySQL query successful.");
+    console.log("Tables found:", rows);
 
     const tables = rows.map((row) => Object.values(row)[0]);
 
@@ -60,7 +71,12 @@ const getTables = async (req, res) => {
       tables,
     });
   } catch (error) {
-    console.error("Get tables error:", error.message);
+    console.error("Get tables error:", error);
+    console.error("Error message:", error.message);
+    console.error("Error code:", error.code);
+    console.error("Error errno:", error.errno);
+    console.error("Error syscall:", error.syscall);
+    console.error("Error hostname:", error.hostname);
 
     res.status(500).json({
       success: false,
@@ -142,7 +158,7 @@ const getTableData = async (req, res) => {
 };
 
 // ============================================================
-// EXPORT
+// EXPORT CONTROLLERS
 // ============================================================
 
 module.exports = {
